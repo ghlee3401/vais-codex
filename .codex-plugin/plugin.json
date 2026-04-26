@@ -1,0 +1,36 @@
+{
+  "name": "vais-code",
+  "version": "0.1.0",
+  "description": "Virtual AI C-Suite for product and software delivery in Codex",
+  "author": {
+    "name": "ghlee3401"
+  },
+  "homepage": "https://github.com/ghlee3401/vais-codex",
+  "repository": "https://github.com/ghlee3401/vais-codex",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "ai-agents",
+    "c-suite",
+    "workflow",
+    "vais"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "VAIS Code",
+    "shortDescription": "Virtual AI C-Suite workflow for Codex",
+    "longDescription": "Run product strategy, planning, design, implementation, QA, security, business, and operations through a structured C-Suite workflow in Codex.",
+    "developerName": "ghlee3401",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "vais ceo plan online-bookstore",
+      "vais cto plan user-login-flow",
+      "vais status"
+    ],
+    "brandColor": "#2563EB"
+  }
+}

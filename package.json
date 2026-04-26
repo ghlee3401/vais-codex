@@ -1,0 +1,33 @@
+{
+  "name": "vais-code",
+  "version": "0.1.0",
+  "description": "Virtual AI C-Suite for product and software delivery — Codex Plugin",
+  "author": "ghlee3401",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/*.test.js tests/integration/*.test.js",
+    "test:integration": "node --test tests/integration/*.test.js",
+    "lint": "eslint scripts/ lib/ hooks/ --max-warnings=0",
+    "validate": "node scripts/vais-validate-plugin.js",
+    "install:global": "bash scripts/install-global.sh",
+    "update:global": "bash scripts/update-global.sh",
+    "uninstall:global": "bash scripts/uninstall-global.sh"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "codex",
+    "codex-plugin",
+    "ai-agents",
+    "c-suite",
+    "vais"
+  ]
+}

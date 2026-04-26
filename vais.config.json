@@ -1,0 +1,401 @@
+{
+  "version": "0.1.0",
+  "plugin": {
+    "name": "vais-code",
+    "description": "Virtual AI C-Suite for product and software delivery in Codex",
+    "distributionUrl": "https://github.com/ghlee3401/vais-codex"
+  },
+  "cSuite": {
+    "roles": {
+      "ceo": {
+        "required": true,
+        "model": "opus",
+        "layer": "executive",
+        "agent": "agents/ceo/ceo.md",
+        "subAgents": [
+          "absorb-analyzer",
+          "skill-creator",
+          "vision-author",
+          "strategy-kernel-author",
+          "okr-author",
+          "pr-faq-author"
+        ]
+      },
+      "cpo": {
+        "required": false,
+        "model": "opus",
+        "layer": "product",
+        "agent": "agents/cpo/cpo.md",
+        "subAgents": [
+          "product-discoverer",
+          "product-strategist",
+          "product-researcher",
+          "prd-writer",
+          "backlog-manager",
+          "roadmap-author",
+          "ux-researcher",
+          "data-analyst"
+        ]
+      },
+      "cto": {
+        "required": false,
+        "model": "opus",
+        "layer": "technology",
+        "agent": "agents/cto/cto.md",
+        "subAgents": [
+          "infra-architect",
+          "backend-engineer",
+          "frontend-engineer",
+          "ui-designer",
+          "db-architect",
+          "qa-engineer",
+          "test-engineer",
+          "incident-responder"
+        ]
+      },
+      "cso": {
+        "required": false,
+        "model": "opus",
+        "layer": "security",
+        "agent": "agents/cso/cso.md",
+        "subAgents": [
+          "security-auditor",
+          "code-reviewer",
+          "secret-scanner",
+          "dependency-analyzer",
+          "plugin-validator",
+          "skill-validator",
+          "compliance-auditor"
+        ]
+      },
+      "cbo": {
+        "required": false,
+        "model": "opus",
+        "layer": "business",
+        "agent": "agents/cbo/cbo.md",
+        "subAgents": [
+          "market-researcher",
+          "customer-segmentation-analyst",
+          "seo-analyst",
+          "copy-writer",
+          "growth-analyst",
+          "pricing-analyst",
+          "financial-modeler",
+          "unit-economics-analyst",
+          "finops-analyst",
+          "marketing-analytics-analyst"
+        ]
+      },
+      "coo": {
+        "required": false,
+        "model": "opus",
+        "layer": "operations",
+        "agent": "agents/coo/coo.md",
+        "subAgents": [
+          "release-engineer",
+          "release-notes-writer",
+          "ci-cd-configurator",
+          "container-config-author",
+          "migration-planner",
+          "runbook-author",
+          "sre-engineer",
+          "release-monitor",
+          "performance-engineer"
+        ]
+      }
+    },
+    "rolesList": ["ceo", "cpo", "cto", "cso", "cbo", "coo"],
+    "autoKeywords": {
+      "ceo": [
+        "new product",
+        "신규 서비스",
+        "방향",
+        "전략",
+        "strategy",
+        "launch",
+        "런칭"
+      ],
+      "cso": [
+        "payment",
+        "auth",
+        "login",
+        "security",
+        "결제",
+        "인증",
+        "보안"
+      ],
+      "cbo": [
+        "landing",
+        "marketing",
+        "마케팅",
+        "랜딩",
+        "캠페인",
+        "pricing",
+        "가격",
+        "cost",
+        "비용",
+        "roi"
+      ],
+      "coo": [
+        "deploy",
+        "release",
+        "배포",
+        "릴리스",
+        "운영",
+        "infra"
+      ]
+    }
+  },
+  "dependencies": {
+    "cto": ["cpo"],
+    "cso": ["cto"],
+    "coo": ["cto"],
+    "cbo": []
+  },
+  "pipeline": {
+    "launchDefault": ["cbo", "cpo", "cto", "cso", "cbo", "coo"],
+    "pipelineRoles": ["cbo", "cpo", "cto", "cso", "coo"],
+    "routing": "dynamic",
+    "reviewLoops": {
+      "cso-cto": {
+        "maxIterations": 3,
+        "trigger": "critical > 0"
+      }
+    },
+    "finalReview": {
+      "maxIterations": 2
+    }
+  },
+  "observability": {
+    "enabled": true,
+    "stateFile": ".vais/agent-state.json",
+    "eventLog": ".vais/event-log.jsonl",
+    "maxEventLogSizeMB": 10,
+    "rotateAfterDays": 30,
+    "archivePath": ".vais/archive/"
+  },
+  "mcp": {
+    "enabled": false,
+    "server": "mcp/vais-server/",
+    "port": 8765
+  },
+  "workflow": {
+    "_sot": "PDCA 단계의 단일 진실 소스(SoT)는 본 키. CODEX.md/cto.md의 단계 표는 표시용 사본이며 본 키와 동기화 필수.",
+    "phases": [
+      "ideation",
+      "plan",
+      "design",
+      "do",
+      "qa",
+      "report"
+    ],
+    "mandatoryPhases": [
+      "plan",
+      "design",
+      "do",
+      "qa"
+    ],
+    "optionalPhases": [
+      "ideation"
+    ],
+    "phaseNames": {
+      "ideation": "아이디에이션",
+      "plan": "기획",
+      "design": "설계",
+      "do": "구현",
+      "qa": "QA",
+      "report": "보고서"
+    },
+    "phaseMeta": {
+      "ideation": { "optional": true,  "description": "자유 대화, 산출물 비강제" },
+      "plan":     { "optional": false, "description": "요구사항/범위 문서" },
+      "design":   { "optional": false, "description": "설계 문서" },
+      "do":       { "optional": false, "description": "구현" },
+      "qa":       { "optional": false, "description": "검증" },
+      "report":   { "optional": false, "description": "최종 리포트" }
+    },
+    "docPaths": {
+      "ideation": "docs/{feature}/00-ideation/main.md",
+      "plan": "docs/{feature}/01-plan/main.md",
+      "design": "docs/{feature}/02-design/main.md",
+      "do": "docs/{feature}/03-do/main.md",
+      "qa": "docs/{feature}/04-qa/main.md",
+      "report": "docs/{feature}/05-report/main.md",
+      "_subdocSince": "v0.57.0 — sub-doc preservation",
+      "topic": "docs/{feature}/{phase}/{topic}.md",
+      "scratchpad": "docs/{feature}/{phase}/_tmp/{slug}.md",
+      "scratchpadQualified": "docs/{feature}/{phase}/_tmp/{slug}.{qualifier}.md",
+      "systemArtifacts": [
+        "docs/{feature}/02-design/interface-contract.md"
+      ]
+    },
+    "topicPresets": {
+      "_description": "Phase별 권장 topic 프리셋. v0.58+ phase×c-level 계층 지원 (string[] 배열 형식도 backward-compat). C-Level이 확장 가능 (강제 아님).",
+      "_schemaVersion": 2,
+      "00-ideation": {
+        "_default": ["problem", "hypotheses", "exit-criteria"]
+      },
+      "01-plan": {
+        "_default": ["requirements", "impact-analysis", "policy"],
+        "cbo": ["market-analysis", "gtm-plan", "unit-economics"],
+        "cpo": ["requirements", "user-stories", "acceptance-criteria"],
+        "cto": ["architecture-plan", "impact-analysis", "tech-risks"],
+        "cso": ["security-requirements", "compliance-checklist"],
+        "coo": ["deployment-plan", "monitoring-spec"]
+      },
+      "02-design": {
+        "_default": ["architecture", "data-model", "api-contract", "ui-flow", "security"],
+        "cbo": ["gtm-funnel", "pricing-tier", "financial-model"],
+        "cto": ["architecture", "data-model", "api-contract"],
+        "cso": ["threat-model", "security", "compliance"],
+        "coo": ["deployment-architecture", "monitoring-design"]
+      },
+      "03-do": {
+        "_default": ["implementation", "changes", "tests"]
+      },
+      "04-qa": {
+        "_default": ["findings", "metrics", "issues"]
+      },
+      "05-report": {
+        "_default": []
+      }
+    },
+    "subDocPolicy": {
+      "_description": "v0.57.0 sub-doc preservation 정책. sub-agent는 _tmp/에 scratchpad, C-Level은 topic 문서로 큐레이션.",
+      "enforcement": "warn",
+      "_enforcementValues": ["warn", "retry", "fail"],
+      "scratchpadPreserve": true,
+      "scratchpadMinBytes": 500,
+      "requireCurationRecord": true,
+      "reportPhase": "single"
+    },
+    "cLevelCoexistencePolicy": {
+      "_description": "v0.58.0 multi-C-Level main.md append-merge 정책. v0.58.4: mainMdMaxLinesAction 을 'refuse' 로 승격 — size budget 초과 시 doc-validator 가 exit(1) 차단.",
+      "enforcement": "warn",
+      "_enforcementValues": ["warn", "retry", "fail"],
+      "mainMergeRule": "append-only",
+      "_mainMergeRuleValues": ["append-only", "diff-merge"],
+      "sectionMarkerStyle": "heading",
+      "_sectionMarkerStyleValues": ["heading", "html-comment"],
+      "ownerRequired": true,
+      "reentrySectionReplace": true,
+      "reentryChangelogRequired": true,
+      "mainMdMaxLines": 200,
+      "mainMdMaxLinesAction": "refuse",
+      "_mainMdMaxLinesActionValues": ["warn", "refuse"]
+    },
+    "scopeContractPolicy": {
+      "_description": "v0.58.3 plan-scope-contract 정책. plan/main.md 에 '## 요청 원문' / '## In-scope' / '## Out-of-scope' H2 3섹션 강제. CODEX.md Rule #9 (Boil the Lake) dog-fooding. v0.58.4: warn → fail 승격 — 3섹션 누락 시 doc-validator 가 exit(1) 차단.",
+      "enforcement": "fail",
+      "_enforcementValues": ["warn", "retry", "fail", "off"],
+      "targetPhase": "01-plan",
+      "requiredSections": ["요청 원문", "In-scope", "Out-of-scope"]
+    }
+  },
+  "gapThreshold": 0.90,
+  "gapAnalysis": {
+    "matchThreshold": 90,
+    "maxIterations": 5,
+    "autoIterate": true
+  },
+  "qa": {
+    "autoReview": true,
+    "checklistRequired": true
+  },
+  "manager": {
+    "enabled": true,
+    "memory": {
+      "path": ".vais/memory.json",
+      "maxEntries": 500
+    },
+    "autoInvoke": [
+      "auto",
+      "fix"
+    ],
+    "entryTypes": [
+      "decision",
+      "change",
+      "feedback",
+      "dependency",
+      "debt",
+      "error",
+      "milestone"
+    ]
+  },
+  "orchestration": {
+    "gateAction": "confirm",
+    "profileGateEnabled": true,
+    "_profileGateEnabled_description": "F1 Project Profile 게이트 활성화 여부. true = ON (기본, GA 이후). false = 명시적 opt-out. 키 누락 시 lib/project-profile.js 의 fallback 도 true."
+  },
+  "gates": {
+    "_description": "v0.56 sub-plan 07: 메트릭 기반 게이팅. gate-manager가 defaults + roleOverrides를 읽어 GATE_DEFINITIONS 덮어쓰기.",
+    "defaults": {
+      "designCompleteness": 80,
+      "codeQualityScore": 60,
+      "criticalIssueCount": 0,
+      "matchRate": 90,
+      "owaspScore": 8,
+      "conventionCompliance": 70,
+      "marketingScore": 70,
+      "opsReadiness": 70
+    },
+    "roleOverrides": {
+      "cso": { "matchRate": 95, "codeQualityScore": 80 },
+      "cto": {}
+    },
+    "cto": {
+      "plan": {
+        "requirePrd": "ask",
+        "_requirePrdValues": ["ask", "strict", "skip"],
+        "_requirePrdDescription": {
+          "ask": "PRD 부재/부실 시 CP-0 체크포인트로 사용자에게 4 옵션 제시 (기본)",
+          "strict": "PRD 부재/부실 시 자동 거부, CPO 실행 안내만",
+          "skip": "PRD 검사 자체를 생략하고 자동 강행"
+        },
+        "completenessThreshold": 6,
+        "_completenessDescription": "8개 표준 섹션 중 N개 이상 매칭 시 'full'로 분류"
+      }
+    }
+  },
+  "advisor": {
+    "enabled": true,
+    "executor": { "model": "gpt-5.4" },
+    "advisor": { "model": "gpt-5.5" },
+    "max_uses_per_request": 3,
+    "caching": { "type": "ephemeral", "ttl": "5m" },
+    "max_calls_per_session": 15,
+    "monthly_budget_usd": 200,
+    "beta_header": "advisor-tool-2026-03-01",
+    "spend_file": ".vais/advisor-spend.json",
+    "pricing": {
+      "input": 15,
+      "output": 75,
+      "cache_read": 1.5,
+      "cache_write": 18.75
+    },
+    "fallback": {
+      "strategy": "degrade_gracefully",
+      "notify_once_per_session": true
+    }
+  },
+  "conventions": {
+    "referenceComment": {
+      "description": "외부 사이트/문서를 참고하여 코드를 작성한 경우, 해당 코드 블록 위에 @see 주석을 추가한다",
+      "format": "{commentChar} @see {URL}",
+      "placement": "참고한 코드 블록 바로 위",
+      "examples": {
+        "js/ts": "// @see https://nextjs.org/docs/app/api-reference/functions/generate-metadata#twitter",
+        "python": "# @see https://docs.python.org/3/library/asyncio.html",
+        "html": "<!-- @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta -->",
+        "css": "/* @see https://tailwindcss.com/docs/customizing-colors */",
+        "shell": "# @see https://www.gnu.org/software/bash/manual/bash.html#Pipelines"
+      },
+      "rules": [
+        "참고한 URL 전체를 작성한다 (축약 금지)",
+        "한 코드 블록에 여러 참고가 있으면 @see를 줄마다 하나씩 작성한다",
+        "참고 코드 블록 바로 위에 작성한다 (빈 줄 없이)",
+        "자명한 표준 라이브러리 사용은 @see 생략 가능"
+      ]
+    }
+  }
+}

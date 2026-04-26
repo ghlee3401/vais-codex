@@ -1,0 +1,10 @@
+node_modules/
+.vais/
+.bkit/
+.codex/settings.local.json
+.codex/settings.json
+*.log
+.DS_Store
+references/
+__pycache__/
+*.pyc
