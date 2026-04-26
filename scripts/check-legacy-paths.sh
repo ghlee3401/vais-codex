@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# VAIS Code — legacy-path guard (shared, hook + CI)
+# VAIS Code — legacy-path guard (shared CLI + CI)
 # Usage:
-#   bash scripts/check-legacy-paths.sh --mode=staged   # hook: git diff --cached
+#   bash scripts/check-legacy-paths.sh --mode=staged   # staged diff
 #   bash scripts/check-legacy-paths.sh --mode=tree     # CI:   git ls-files
 #
 # Exit codes:
@@ -26,7 +26,6 @@ EXCEPTIONS=(
   "tests/paths.test.js"
   "README.md"
   "CODEX.md"
-  ".hooks/pre-commit"
   "scripts/check-legacy-paths.sh"
 )
 

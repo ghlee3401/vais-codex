@@ -4,7 +4,7 @@ version: 0.50.0
 description: |
   고객 세분화·페르소나·라이프사이클 분석 전문. RFM/AARRR+R/JTBD/Cooper Goal-Directed Persona 프레임워크 기반.
   Use when: CBO가 Plan phase에서 고객 세그먼트 정의를 위임할 때. Policy: Always (A) — 모든 프로젝트가 1차 페르소나 명시.
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

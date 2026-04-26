@@ -5,7 +5,7 @@ description: |
   Verifies regulatory compliance including GDPR/privacy protection, license compatibility,
   and audit log validation. Handles compliance (distinct from security-auditor's code vulnerability focus).
   Use when: delegated by CSO for regulatory compliance checks or license auditing.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

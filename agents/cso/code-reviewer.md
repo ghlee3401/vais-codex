@@ -5,7 +5,7 @@ description: |
   Performs independent code review after CTO QA pass. Examines bug patterns, performance issues,
   and code quality from a fresh perspective.
   Use when: delegated by CSO Gate C for independent code quality verification.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

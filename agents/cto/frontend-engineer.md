@@ -4,7 +4,7 @@ version: 1.0.0
 description: |
   Implements frontend interfaces using React/Next.js and related frameworks.
   Use when: delegated by CTO for UI component development or frontend feature implementation.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

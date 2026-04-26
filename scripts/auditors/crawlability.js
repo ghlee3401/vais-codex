@@ -4,7 +4,7 @@ const { SEVERITY } = require('../seo-helpers');
 
 // ─── 상수 ─────────────────────────────────────────────
 
-const AUTH_HOOKS = [
+const AUTH_APIS = [
   'useSession', 'useAuth', 'useUser', 'useCurrentUser',
   'getServerSession', 'getSession', 'auth', 'currentUser'
 ];
@@ -32,9 +32,9 @@ function isExcluded(relPath) {
   return EXCLUDED_FILES.some(ex => relPath.includes(ex));
 }
 
-function hasAuthHook(content) {
-  return AUTH_HOOKS.some(hook => {
-    const re = new RegExp(`\\b${hook}\\b`);
+function hasAuthApi(content) {
+  return AUTH_APIS.some(api => {
+    const re = new RegExp(`\\b${api}\\b`);
     return re.test(content);
   });
 }
@@ -54,14 +54,14 @@ function hasRedirectCall(content) {
  *
  * 검사 항목:
  *   L-01: 조건부 return null / 삼항 null / 빈 fragment 반환
- *   L-02: 인증 게이트 패턴 (auth hook/import + redirect 또는 null)
+ *   L-02: 인증 게이트 패턴 (auth API/import + redirect 또는 null)
  *   L-03: 무조건적 페이지 레벨 redirect
  */
 function auditCrawlability(content, filePath, relPath, result) {
   if (!isPageOrLayout(filePath)) return;
   if (isExcluded(relPath)) return;
 
-  const authDetected = hasAuthHook(content) || hasAuthImport(content);
+  const authDetected = hasAuthApi(content) || hasAuthImport(content);
   const redirectDetected = hasRedirectCall(content);
 
   // ── L-01: 조건부 return null ──

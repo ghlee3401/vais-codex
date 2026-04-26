@@ -5,7 +5,7 @@ description: |
   Generates test code including unit, integration, and e2e tests.
   Focuses on code creation (distinct from qa-engineer's verification and gap analysis role).
   Use when: delegated by CTO for test code generation or test coverage expansion.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

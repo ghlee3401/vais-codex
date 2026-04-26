@@ -4,7 +4,7 @@ version: 0.50.0
 description: |
   PRD → user story 백로그 변환. INVEST/MoSCoW/RICE 기반 우선순위 + sprint plan + story points.
   Use when: CPO가 Design phase에서 PRD를 실행 가능한 백로그로 분해할 때.
-model: sonnet
+model: gpt-5.4
 layer: product
 agent-type: subagent
 parent: cpo

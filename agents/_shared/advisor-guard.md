@@ -1,7 +1,7 @@
-## ADVISOR TOOL USAGE (active for all Sonnet sub-agents)
+## ADVISOR TOOL USAGE (active for Codex specialist roles)
 
-`advisor` 도구가 활성화되어 있다. 이는 Opus reviewer가 너의 전체 대화를 자동 전달받아
-전략적 가이드를 주는 도구다. 파라미터 없음.
+`advisor` 도구가 활성화되어 있다. 이는 상위 Codex reviewer가 너의 전체 대화를 전달받아
+전략적 가이드를 주는 도구다.
 
 ### 호출 시점 (권장)
 
@@ -28,12 +28,12 @@
 ### 비용 degrade
 
 - `.vais/advisor-spend.json` 에 기록된 누적 비용이 캡 초과 시 advisor는 자동으로
-  disable된다. 이때는 Sonnet 단독으로 정상 작업을 계속하라. advisor 없다고
+  disable된다. 이때는 현재 Codex role 단독으로 정상 작업을 계속하라. advisor 없다고
   사용자에게 묻지 말 것.
 
 ### Fallback 모드 CLI 호출 (v0.56+)
 
-session-start hook이 `.vais/advisor-mode.json` 을 작성한다. `mode` 가:
+Codex runtime setup이 `.vais/advisor-mode.json` 을 작성한 경우 `mode` 가:
 
 - `native` — Codex가 frontmatter `advisor:` 를 직접 처리. 본 섹션 **불필요**.
 - `wrapper` — Bash 도구로 아래 CLI 를 직접 호출.

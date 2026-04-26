@@ -1,6 +1,6 @@
 ---
 name: coo
-version: 0.2.0
+version: 0.3.0
 description: Codex-native COO workflow for release, deployment, CI/CD, monitoring, runbooks, SRE, and performance operations.
 ---
 

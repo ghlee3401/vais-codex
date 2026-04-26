@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS hook] cp-tracker crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
-process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] cp-tracker rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
+process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS CLI] cp-tracker crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
+process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS CLI] cp-tracker rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
 /**
- * VAIS Code - Checkpoint Tracker (PostToolUse: 사용자 확인)
- * C-Level 에이전트의 사용자 확인 호출을 event-log에 기록.
- * SubagentStop 시 cp-guard.js가 이 기록을 검증하여 CP 건너뛰기를 방지합니다.
+ * VAIS Code - Checkpoint Tracker CLI
+ * C-Level 에이전트의 checkpoint confirmation을 event-log에 기록.
+ * role completion CLI에서 cp-guard.js가 이 기록을 검증하여 CP 건너뛰기를 방지합니다.
  */
-const { readStdin, parseHookInput, outputAllow } = require('../lib/io');
-const { logHook } = require('../lib/hook-logger');
+const { readStdin, parseRuntimeInput, outputAllow } = require('../lib/io');
+const { logRuntimeEvent } = require('../lib/runtime-logger');
 const { debugLog } = require('../lib/debug');
 
 function main() {
@@ -50,7 +50,7 @@ function main() {
       cp: cpId,
       question: question.substring(0, 200),
     });
-    logHook('PostToolUse:사용자 확인', 'ok', { role: activeRole, cp: cpId });
+    logRuntimeEvent('cli:checkpoint', 'ok', { role: activeRole, cp: cpId });
     debugLog('CPTracker', 'Checkpoint recorded', { role: activeRole, cp: cpId });
   } catch (err) {
     debugLog('CPTracker', 'event-log write failed', { error: err.message });

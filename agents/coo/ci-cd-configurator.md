@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Configures CI/CD pipelines (GitHub Actions / GitLab CI / CircleCI) for cloud/hybrid deployments. Designs lint → test → build → deploy stages with environment-specific secrets (dev/staging/prod) + rollback triggers. Scope-gated to prevent useless CI/CD generation for local-only or solo OSS projects.
   Use when: delegated by COO for pipeline setup or modification. Policy: Scope (B) — only when deployment.target IN [cloud, hybrid] AND users.target_scale >= pilot.
-model: sonnet
+model: gpt-5.4
 layer: operations
 agent-type: subagent
 parent: coo

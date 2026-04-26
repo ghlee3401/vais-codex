@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS hook] bash-guard crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
-process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] bash-guard rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
+process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS CLI] bash-guard crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
+process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS CLI] bash-guard rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
 /**
- * VAIS Code - Bash Guard (PreToolUse)
+ * VAIS Code - Command Safety Guard
  * 위험한 명령을 자동 차단
  */
-const { readStdin, parseHookInput, outputAllow, outputBlock } = require('../lib/io');
+const { readStdin, parseRuntimeInput, outputAllow, outputBlock } = require('../lib/io');
 const { debugLog } = require('../lib/debug');
-const { logHook } = require('../lib/hook-logger');
+const { logRuntimeEvent } = require('../lib/runtime-logger');
 
 const BLOCKED = [
   { pattern: /drop\s+database/i, reason: 'DB 전체 삭제 시도' },
@@ -60,25 +60,25 @@ module.exports = { BLOCKED, ASK, checkGuard };
 // 직접 실행 시에만 stdin 처리
 if (require.main === module) {
   const input = readStdin();
-  const { command } = parseHookInput(input);
+  const { command } = parseRuntimeInput(input);
 
   const result = checkGuard(command);
 
   if (result.decision === 'block') {
-    logHook('PreToolUse:Bash', 'blocked', { command, reason: result.reason });
+    logRuntimeEvent('cli:bash-guard', 'blocked', { command, reason: result.reason });
     debugLog('BashGuard', 'BLOCKED', { command, reason: result.reason });
     outputBlock(result.reason);
     process.exit(0);
   }
 
   if (result.decision === 'warn') {
-    logHook('PreToolUse:Bash', 'warn', { command, reason: result.reason });
+    logRuntimeEvent('cli:bash-guard', 'warn', { command, reason: result.reason });
     debugLog('BashGuard', 'WARNING', { command, reason: result.reason });
     outputAllow(`⚠️ 주의: ${result.reason}\n실행하려는 명령: \`${command}\`\n사용자에게 확인을 받으세요.`);
     process.exit(0);
   }
 
-  logHook('PreToolUse:Bash', 'ok');
+  logRuntimeEvent('cli:bash-guard', 'ok');
   outputAllow();
   process.exit(0);
 }

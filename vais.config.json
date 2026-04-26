@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "plugin": {
     "name": "vais-code",
     "description": "Virtual AI C-Suite for product and software delivery in Codex",
@@ -9,7 +9,7 @@
     "roles": {
       "ceo": {
         "required": true,
-        "model": "opus",
+        "model": "gpt-5.5",
         "layer": "executive",
         "agent": "agents/ceo/ceo.md",
         "subAgents": [
@@ -23,7 +23,7 @@
       },
       "cpo": {
         "required": false,
-        "model": "opus",
+        "model": "gpt-5.5",
         "layer": "product",
         "agent": "agents/cpo/cpo.md",
         "subAgents": [
@@ -39,7 +39,7 @@
       },
       "cto": {
         "required": false,
-        "model": "opus",
+        "model": "gpt-5.5",
         "layer": "technology",
         "agent": "agents/cto/cto.md",
         "subAgents": [
@@ -55,7 +55,7 @@
       },
       "cso": {
         "required": false,
-        "model": "opus",
+        "model": "gpt-5.5",
         "layer": "security",
         "agent": "agents/cso/cso.md",
         "subAgents": [
@@ -70,7 +70,7 @@
       },
       "cbo": {
         "required": false,
-        "model": "opus",
+        "model": "gpt-5.5",
         "layer": "business",
         "agent": "agents/cbo/cbo.md",
         "subAgents": [
@@ -88,7 +88,7 @@
       },
       "coo": {
         "required": false,
-        "model": "opus",
+        "model": "gpt-5.5",
         "layer": "operations",
         "agent": "agents/coo/coo.md",
         "subAgents": [

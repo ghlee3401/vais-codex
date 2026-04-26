@@ -5,37 +5,37 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
-const { parseHookInput, truncate, MAX_CONTEXT_LENGTH } = require('../lib/io');
+const { parseRuntimeInput, truncate, MAX_CONTEXT_LENGTH } = require('../lib/io');
 
-describe('parseHookInput', () => {
+describe('parseRuntimeInput', () => {
   it('tool_input에서 command를 파싱한다', () => {
     const input = { tool_input: { command: 'npm install' } };
-    const result = parseHookInput(input);
+    const result = parseRuntimeInput(input);
     assert.equal(result.command, 'npm install');
   });
 
   it('tool_input에서 file_path를 파싱한다', () => {
     const input = { tool_input: { file_path: '/src/app.js' } };
-    const result = parseHookInput(input);
+    const result = parseRuntimeInput(input);
     assert.equal(result.filePath, '/src/app.js');
   });
 
   it('input 키에서도 파싱한다 (대체 형식)', () => {
     const input = { input: { command: 'ls -la', file_path: '/tmp/test' } };
-    const result = parseHookInput(input);
+    const result = parseRuntimeInput(input);
     assert.equal(result.command, 'ls -la');
     assert.equal(result.filePath, '/tmp/test');
   });
 
   it('빈 입력에서 빈 문자열 반환', () => {
-    const result = parseHookInput({});
+    const result = parseRuntimeInput({});
     assert.equal(result.command, '');
     assert.equal(result.filePath, '');
     assert.equal(result.content, '');
   });
 
   it('undefined 입력 처리', () => {
-    const result = parseHookInput(undefined);
+    const result = parseRuntimeInput(undefined);
     assert.equal(result.command, '');
   });
 });

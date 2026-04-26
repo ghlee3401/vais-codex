@@ -163,7 +163,7 @@ graph LR
 
 - **catalog.json**: build-catalog.js 가 atomicWriteSync 사용 (`lib/fs-utils.js`)
 - **.vais/status.json**: lib/status.js 가 lock + retry pattern
-- **profile.yaml**: 사용자 편집 우선 — hook 은 미존재 시만 생성
+- **profile.yaml**: 사용자 편집 우선 — runtime CLI는 미존재 시만 생성
 
 ---
 

@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Writes Amazon-style Working Backwards PR/FAQ document. Produces 1-page Press Release (5 paragraphs from future date) + Internal FAQ (6 items: timing/risk/P&L/failure/competition/strategy fit) + External FAQ (5 items). Pressure-tests product idea from customer POV before development.
   Use when: delegated by CEO at Core phase to validate product idea. Policy: User-select (C) — valuable but not always necessary; alternates to Lean Canvas / JTBD.
-model: sonnet
+model: gpt-5.4
 layer: strategy
 agent-type: subagent
 parent: ceo

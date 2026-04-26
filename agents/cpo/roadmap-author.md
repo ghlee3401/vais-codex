@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Produces Now-Next-Later Roadmap grounded in ProductPlan framework. Translates OKR + strategy into outcome-based roadmap (not feature list). Maps initiatives to outcomes with dependency + risk flags. Hands off to backlog-manager for sprint plan conversion.
   Use when: delegated by CPO at What phase after OKR is defined. Policy: Always (A) — roadmap is the bridge from strategy to backlog.
-model: sonnet
+model: gpt-5.4
 layer: product
 agent-type: subagent
 parent: cpo

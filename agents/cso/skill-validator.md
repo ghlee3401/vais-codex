@@ -5,7 +5,7 @@ description: |
   Validates skill/agent markdown frontmatter, description quality (3rd-person, what+when,
   1024-char limit, triggers), and progressive disclosure. Generates copy-paste before/after rewrites.
   Use when: delegated by CSO for markdown-level authoring quality checks (distinct from plugin-validator which checks whole-plugin deployment structure).
-model: sonnet
+model: gpt-5.4
 tools: [Read, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:
@@ -28,7 +28,7 @@ execution:
   trigger_events: []
   scope_conditions: []
   review_recommended: false
-canon_source: "Model provider Codex Skill Specification (docs.anthropic.com/skills) + Description Quality Guidelines (3rd-person, what+when, 1024-char limit, triggers)"
+canon_source: "Model provider Codex Skill Specification + Description Quality Guidelines (3rd-person, what+when, 1024-char limit, triggers)"
 includes:
   - _shared/advisor-guard.md
 ---

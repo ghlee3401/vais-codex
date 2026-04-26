@@ -5,7 +5,7 @@ description: |
   Pricing 전략 전문. Cost-plus/Value-based/Competitive 가격 모델 + tier 설계 + 매출 시뮬레이션.
   financial-modeler와의 경계: pricing-analyst는 "가격 전략", financial-modeler는 "전체 P&L/Cash Flow".
   Use when: CBO가 Design phase에서 가격 tier 설계를 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

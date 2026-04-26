@@ -4,7 +4,7 @@ version: 1.0.0
 description: |
   Analyzes product metrics, designs A/B tests, and performs funnel analysis to support data-driven decisions.
   Use when: delegated by CPO, CTO, or CBO for product metrics analysis or experiment design.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

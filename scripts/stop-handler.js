@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS hook] stop-handler crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
-process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] stop-handler rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
+process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS CLI] stop-handler crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
+process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS CLI] stop-handler rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
 /**
  * VAIS Code - Stop Handler
  * 응답 완료 시 현재 진행 상태 요약 + 다음 단계 안내
@@ -8,7 +8,7 @@ process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] 
 const fs = require('fs');
 const { readStdin, outputAllow } = require('../lib/io');
 const { debugLog } = require('../lib/debug');
-const { logHook } = require('../lib/hook-logger');
+const { logRuntimeEvent } = require('../lib/runtime-logger');
 const { getActiveFeature, getProgressSummary } = require('../lib/status');
 const { loadConfig } = require('../lib/paths');
 const { sendWebhook } = require('../lib/webhook');
@@ -121,7 +121,7 @@ if (nextPhase) {
 lines.push('╚══════════════════════════════════════');
 
 const output = lines.join('\n');
-logHook('Stop', 'ok', { feature: activeFeature, phase: currentPhase, progress: `${completedCount}/${totalCount}` });
+logRuntimeEvent('cli:status-summary', 'ok', { feature: activeFeature, phase: currentPhase, progress: `${completedCount}/${totalCount}` });
 debugLog('StopHandler', 'Status summary', { feature: activeFeature, currentPhase, completedCount });
 
 sendWebhook('stop', {

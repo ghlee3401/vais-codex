@@ -4,7 +4,7 @@ version: 0.50.0
 description: |
   카피라이팅 + 브랜드 포지셔닝. PAS/AIDA/BAB 프레임 기반 마케팅 카피 제작. (v0.59 Sprint 6 — VPC 책임은 product-strategist 로 이관됨.)
   Use when: CBO가 Design/Do phase에서 브랜드 메시지 + 카피 제작을 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

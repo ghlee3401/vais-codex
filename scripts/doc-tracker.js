@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS hook] doc-tracker crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
-process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] doc-tracker rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
+process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS CLI] doc-tracker crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
+process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS CLI] doc-tracker rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
 /**
- * VAIS Code - Document Tracker (PostToolUse: Write|Edit)
+ * VAIS Code - Document Tracker CLI
  * 문서 작성/수정 시 워크플로우 상태 자동 업데이트
  */
 const fs = require('fs');
 const path = require('path');
-const { readStdin, parseHookInput, outputAllow } = require('../lib/io');
+const { readStdin, parseRuntimeInput, outputAllow } = require('../lib/io');
 const { debugLog } = require('../lib/debug');
-const { logHook } = require('../lib/hook-logger');
+const { logRuntimeEvent } = require('../lib/runtime-logger');
 const { updatePhase, updateRolePhase, getActiveFeature } = require('../lib/status');
 const { addEntry } = require('../lib/memory');
 const { loadConfig, resolveDocPath } = require('../lib/paths');
@@ -48,7 +48,7 @@ function checkPhaseOrder(phase, feature, role, config) {
 
 function main() {
   const input = readStdin();
-  const { filePath } = parseHookInput(input);
+  const { filePath } = parseRuntimeInput(input);
 
   if (!filePath) {
     outputAllow();
@@ -75,7 +75,7 @@ function main() {
           if (!orderCheck.ok) {
             const phaseNames = config.workflow?.phaseNames || {};
             const missingNames = orderCheck.missing.map(p => phaseNames[p] || p).join(', ');
-            logHook('PostToolUse:Write', 'phase_order_warn', { role, phase, missing: orderCheck.missing });
+            logRuntimeEvent('cli:doc-tracker', 'phase_order_warn', { role, phase, missing: orderCheck.missing });
             outputAllow(
               `⚠️ [Phase Order] "${activeFeature}" - [${role.toUpperCase()}] ${phaseNames[phase] || phase} 문서 작성 전에 ` +
               `선행 필수 단계(${missingNames})의 문서가 작성되어야 합니다.\n` +
@@ -116,7 +116,7 @@ function main() {
 
           const phaseNames = config.workflow?.phaseNames || {};
           const phaseName = phaseNames[phase] || phase;
-          logHook('PostToolUse:Write', 'ok', { feature: activeFeature, role, phase, file: path.basename(filePath) });
+          logRuntimeEvent('cli:doc-tracker', 'ok', { feature: activeFeature, role, phase, file: path.basename(filePath) });
           outputAllow(`✅ "${activeFeature}" - [${role.toUpperCase()}] ${phaseName} 문서 작성 완료. 워크플로우 상태가 업데이트되었습니다.`);
           process.exit(0);
         }

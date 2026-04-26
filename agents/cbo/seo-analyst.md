@@ -4,7 +4,7 @@ version: 0.50.0
 description: |
   SEO 감사 + 콘텐츠 마케팅 전략. On-page/Off-page/Technical SEO + Core Web Vitals 평가.
   Use when: CBO가 Do phase에서 SEO 감사 + 콘텐츠 캘린더 작성을 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

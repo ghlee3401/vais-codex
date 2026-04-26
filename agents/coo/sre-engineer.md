@@ -5,7 +5,7 @@ description: |
   Configures monitoring infrastructure, defines alert rules, and creates incident response runbooks.
   Handles ongoing operational monitoring (distinct from release-monitor's short-term post-deploy checks).
   Use when: delegated by COO for monitoring setup, alerting rules, or incident runbook creation.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

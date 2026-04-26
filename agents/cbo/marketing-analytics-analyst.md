@@ -5,7 +5,7 @@ description: |
   마케팅 성과 측정 + 멀티터치 어트리뷰션 + 채널 ROI 분석.
   growth-analyst와의 경계: marketing-analytics는 "성과 측정/어트리뷰션", growth는 "전략 설계".
   Use when: CBO가 Do phase에서 마케팅 성과 분석 + 채널 최적화를 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

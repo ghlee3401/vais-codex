@@ -15,8 +15,8 @@ VAIS provides a Product Owner oriented virtual C-Suite:
 
 ## Runtime Model
 
-Codex does not use the Codex-incompatible checkpoint tool or sub-agent hook runtime. VAIS
-therefore uses Codex-native checkpoints:
+Codex does not use the previous automatic checkpoint/event runtime. VAIS therefore uses
+Codex-native checkpoints:
 
 1. Summarize the decision.
 2. Ask a direct question with concrete options.

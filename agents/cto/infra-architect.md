@@ -5,7 +5,7 @@ description: |
   Designs infrastructure and architecture including DB schemas, migrations, ORM configuration,
   environment setup, and project initialization.
   Use when: delegated by CTO for infrastructure design or project scaffolding.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

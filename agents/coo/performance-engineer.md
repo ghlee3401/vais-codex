@@ -5,7 +5,7 @@ description: |
   Tracks performance metrics including build size, dependency count, and response times.
   Detects performance regressions by comparing against baseline measurements.
   Use when: delegated by COO for performance benchmarking or regression detection.
-model: sonnet
+model: gpt-5.4
 layer: operations
 agent-type: subagent
 parent: coo

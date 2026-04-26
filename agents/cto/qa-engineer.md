@@ -5,7 +5,7 @@ description: |
   Performs integrated quality assurance including build verification, gap analysis, security checks,
   code quality review, and QA scenario validation.
   Use when: delegated by CTO for comprehensive quality verification after implementation.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

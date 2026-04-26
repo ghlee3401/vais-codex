@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Creates schema migration plan when DB schema changes are detected. Produces forward migration script + reverse rollback script + data loss risk assessment + execution checklist. Triggered policy — only activates on explicit DB schema change events, not on every deployment.
   Use when: delegated by COO or CTO when DB schema modification is needed. Policy: Triggered (D) — fires on db-schema-change or migration-requested events. review_recommended=true (data loss risk).
-model: sonnet
+model: gpt-5.4
 layer: operations
 agent-type: subagent
 parent: coo

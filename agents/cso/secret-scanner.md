@@ -5,7 +5,7 @@ description: |
   소스 코드 내 시크릿(API 키, 토큰, 비밀번호) 탐지. Regex + Shannon entropy + context heuristics.
   gitleaks/truffleHog 룰셋 호환 구조. dependency-analyzer와 병렬 실행.
   Use when: CSO가 Do/QA phase에서 시크릿 스캔을 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: security
 agent-type: subagent
 parent: cso

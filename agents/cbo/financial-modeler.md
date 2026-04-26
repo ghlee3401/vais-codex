@@ -6,7 +6,7 @@ description: |
   pricing-analyst와의 경계: financial-modeler는 "전체 P&L/Cash Flow/밸류에이션", pricing은 "가격 전략".
   unit-economics-analyst와의 경계: financial-modeler는 "전사 재무제표", unit-economics는 "단위 경제성(CAC/LTV)".
   Use when: CBO가 Design phase에서 재무 모델링 + 투자자 KPI를 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

@@ -5,7 +5,7 @@ description: |
   Discovers product opportunities using Teresa Torres' Opportunity Solution Tree (OST) framework.
   Generates hypotheses across 8 risk categories, designs experiments, and creates user interview scripts.
   Use when: delegated by CPO for opportunity discovery or experiment design.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Glob, Grep, TodoWrite]
 memory: none
 disallowedTools:

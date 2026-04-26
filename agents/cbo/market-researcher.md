@@ -4,7 +4,7 @@ version: 0.50.0
 description: |
   시장·경쟁 분석 전문. PEST/SWOT (+TOWS)/Porter 5F/TAM-SAM-SOM 프레임워크 기반 시장 기회 평가.
   Use when: CBO가 Plan phase에서 시장 기회 분석을 위임할 때. SWOT은 always, PEST/Five Forces는 scope (글로벌·다국가·규제·신규시장 진입 시).
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

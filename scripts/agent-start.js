@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS hook] agent-start crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
-process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] agent-start rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
-// Design Ref: §2.2 — SubagentStart 훅에서 호출되는 얇은 CLI 래퍼. 로직은 lib/observability/에 위임
+process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS CLI] agent-start crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
+process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS CLI] agent-start rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
+// Design Ref: §2.2 — role start recorder CLI. 로직은 lib/observability/에 위임
 // 사용: node scripts/agent-start.js <role> <phase> [task]
 
 const fs = require('fs');
 const path = require('path');
 const { StateWriter, EventLogger, EVENT_TYPES } = require('../lib/observability/index');
-const { logHook } = require('../lib/hook-logger');
+const { logRuntimeEvent } = require('../lib/runtime-logger');
 
 // A01/A08: CLI 인자 화이트리스트 — vais.config.json의 cSuite.roles + 실행 에이전트 목록 기준
 const VALID_ROLES = (() => {
@@ -60,7 +60,7 @@ try {
 
   sw.markAgentStart(role, phase, task);
   el.log(EVENT_TYPES.AGENT_START, { role, phase, task });
-  logHook('SubagentStart', 'ok', { role, phase });
+  logRuntimeEvent('role:start', 'ok', { role, phase });
 } catch (err) {
   // Plan SC: SC-06 — 기존 동작 완전 호환. observability 실패가 에이전트를 막으면 안 됨
   console.error('[vais observability] agent-start failed:', err.message);

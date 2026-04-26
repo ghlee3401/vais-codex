@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Crafts Vision Statement and BHAG (Big Hairy Audacious Goal) grounded in Collins & Porras 'Built to Last' framework. Produces 1-sentence inspiring vision + 10-30 year BHAG + Vivid Description. Core Ideology (Values + Purpose) + Envisioned Future 2-Part 구조.
   Use when: delegated by CEO at Core phase start or when vision is missing/outdated. Policy: Always (A) — every product needs a north-star vision before strategy.
-model: sonnet
+model: gpt-5.4
 layer: strategy
 agent-type: subagent
 parent: ceo

@@ -14,7 +14,7 @@ removal_target: v0.60
 description: |
   ⚠ DEPRECATED (v0.59 Sprint 7) — 5 분해됨. release-notes-writer / ci-cd-configurator / container-config-author / migration-planner / runbook-author 로 책임 이관. 직접 호출 시 사용자에게 적절한 sub-agent 안내. v0.60 에서 제거 예정.
   Use when: (deprecated) — backwards-compat 만 유지. 신규 작업은 5 분해 sub-agent 직접 호출.
-model: sonnet
+model: gpt-5.4
 layer: operations
 agent-type: subagent
 parent: coo

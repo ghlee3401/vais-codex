@@ -178,7 +178,6 @@ COPY --from=builder --chown=nonroot:nonroot /vais-build/lib ./lib
 COPY --from=builder --chown=nonroot:nonroot /vais-build/scripts ./scripts
 COPY --from=builder --chown=nonroot:nonroot /vais-build/agents ./agents
 COPY --from=builder --chown=nonroot:nonroot /vais-build/skills ./skills
-COPY --from=builder --chown=nonroot:nonroot /vais-build/hooks ./hooks
 COPY --from=builder --chown=nonroot:nonroot /vais-build/templates ./templates
 COPY --from=builder --chown=nonroot:nonroot /vais-build/catalog.json ./
 COPY --from=builder --chown=nonroot:nonroot /vais-build/vais.config.json ./

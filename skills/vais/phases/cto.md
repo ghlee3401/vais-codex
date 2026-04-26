@@ -1,6 +1,6 @@
 ---
 name: cto
-version: 0.2.0
+version: 0.3.0
 description: Codex-native CTO workflow for technical planning, architecture, implementation, testing, QA, and debugging.
 ---
 

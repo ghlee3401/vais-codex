@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS hook] agent-stop crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
-process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] agent-stop rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
-// Design Ref: §2.2 — SubagentStop 훅에서 호출되는 얇은 CLI 래퍼
+process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS CLI] agent-stop crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
+process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS CLI] agent-stop rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
+// Design Ref: §2.2 — role completion validator CLI
 // v0.56 sub-plan 07: 4-step pipeline 구현
 //   Step 1: Document validation (doc-validator)
 //   Step 2: Checkpoint validation (cp-guard)
@@ -9,7 +9,7 @@ process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] 
 //   Step 4: Guidance (verdict 기반 안내)
 // 사용: node scripts/agent-stop.js <role> <outcome> [outputDoc] [phase]
 
-const { logHook } = require('../lib/hook-logger');
+const { logRuntimeEvent } = require('../lib/runtime-logger');
 const { validateDocs, formatResult, C_LEVEL_ROLES } = require('./doc-validator');
 const { validateCheckpoints, formatCPResult } = require('./cp-guard');
 const { getActiveFeature } = require('../lib/status');
@@ -28,7 +28,7 @@ try {
 
   sw.markAgentStop(role, outcome, outputDoc);
   el.log(EVENT_TYPES.AGENT_STOP, { role, outcome, doc: outputDoc });
-  logHook('SubagentStop', 'ok', { role, outcome });
+  logRuntimeEvent('role:stop', 'ok', { role, outcome });
 } catch (err) {
   console.error('[vais observability] agent-stop failed:', err.message);
 }
@@ -106,7 +106,7 @@ if (C_LEVEL_ROLES.includes(role)) {
       const completion = judgePhaseCompletion({
         feature, phase: phaseArg,
         documentsValid, checkpointsRecorded,
-        toolCallCount: 1, // hook 안에서 정확 집계 어려움, 0 아니면 충족 처리
+        toolCallCount: 1, // CLI 단독 실행에서는 정확 집계 어려움, 0 아니면 충족 처리
       });
 
       try {

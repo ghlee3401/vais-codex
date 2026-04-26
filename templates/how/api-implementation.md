@@ -94,20 +94,20 @@ project_context_reason: "How 단계 — Architecture Design 입력 후 API 표�
 
 ## (작성된 sample)
 
-**Project**: VAIS Code Plugin (Codex 마켓플레이스 — API 영역 N/A 이지만 hooks 인터페이스로 sample)
+**Project**: VAIS Code Plugin (Codex 마켓플레이스 — API 영역 N/A 이지만 runtime CLI 인터페이스로 sample)
 
-### Hook Interface (PostToolUse — ideation-guard)
+### Runtime CLI Interface (project-profile extraction)
 
 | 항목 | 내용 |
 |------|------|
 | **Description** | ideation main.md 작성 시 Profile 12 변수 자동 추출 + `.vais/profile.yaml` 저장 |
-| **Trigger** | PostToolUse Write (`docs/{feature}/00-ideation/main.md` 변경 시) |
-| **Input** | hookData.toolInput.file_path + hookData.toolInput.content |
+| **Trigger** | 명시적 Codex phase completion/check command |
+| **Input** | JSON stdin 또는 CLI args: file_path + content |
 | **Output** | profile.yaml (12 변수 + draft annotation) |
 | **Error** | (silent) — fail-soft (next time 재시도) |
 | **Idempotency** | profile.yaml 존재 시 미덮어씀 (사용자 수정 보호) |
 
-### Error Handling (Hook context)
+### Error Handling (Runtime CLI context)
 
 | 시나리오 | Action |
 |---------|--------|
@@ -118,7 +118,7 @@ project_context_reason: "How 단계 — Architecture Design 입력 후 API 표�
 
 ### Idempotency
 
-- ideation main.md 가 변경될 때마다 hook 호출
+- ideation main.md 작성 후 명시적 검증 CLI 호출
 - 기존 profile.yaml 존재 시 추출만 수행 (사용자 작성 우선)
 - diff-based update (변경된 field 만 prompt)
 
@@ -152,4 +152,4 @@ project_context_reason: "How 단계 — Architecture Design 입력 후 API 표�
 
 | version | date | change |
 |---------|------|--------|
-| v1.0 | 2026-04-26 | 초기 작성 — Sprint 12. Fielding REST + Kleppmann DDIA + OpenAPI 3.1 + RFC 7807 정전. API Style + Endpoint Spec + Error Handling + Idempotency + Auth + sample (VAIS Hook 인터페이스) + checklist 8 + anti-pattern 6 |
+| v1.0 | 2026-04-26 | 초기 작성 — Sprint 12. Fielding REST + Kleppmann DDIA + OpenAPI 3.1 + RFC 7807 정전. API Style + Endpoint Spec + Error Handling + Idempotency + Auth + sample (VAIS runtime CLI 인터페이스) + checklist 8 + anti-pattern 6 |

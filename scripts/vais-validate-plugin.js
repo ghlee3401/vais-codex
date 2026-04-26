@@ -17,10 +17,31 @@ const required = [
 
 const expectedRoles = ['ceo', 'cpo', 'cto', 'cso', 'cbo', 'coo'];
 const forbiddenRuntimeStrings = [
+  'Claude',
+  'claude',
   'CLAUDE_PLUGIN_ROOT',
   '.claude-plugin',
   'claude-plugin',
   'AskUserQuestion',
+  'SessionStart',
+  'PreToolUse',
+  'PostToolUse',
+  'SubagentStart',
+  'SubagentStop',
+  'UserPromptSubmit',
+  'hookSpecificOutput',
+  'model: opus',
+  'model: sonnet',
+  '"model": "opus"',
+  '"model": "sonnet"',
+  'Opus-level',
+  'Sonnet',
+];
+
+const forbiddenActivePaths = [
+  'hooks',
+  '.hooks',
+  'lib/hook-logger.js',
 ];
 
 function exists(rel) {
@@ -36,7 +57,7 @@ function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (!['node_modules', '.git', 'legacy'].includes(entry.name)) walk(p, out);
+      if (!['node_modules', '.git', '.vais', 'legacy', 'vendor'].includes(entry.name)) walk(p, out);
     } else {
       out.push(p);
     }
@@ -73,6 +94,10 @@ for (const role of expectedRoles) {
   if (!exists(`agents/${role}/${role}.md`)) errors.push(`Missing C-Level agent: agents/${role}/${role}.md`);
 }
 
+for (const rel of forbiddenActivePaths) {
+  if (exists(rel)) errors.push(`Codex-native plugin surface must not expose legacy runtime path: ${rel}`);
+}
+
 const agentFiles = walk(path.join(root, 'agents')).filter((p) => p.endsWith('.md'));
 const cLevelFiles = new Set(expectedRoles.map((role) => path.join(root, 'agents', role, `${role}.md`)));
 const subAgentCount = agentFiles.filter((p) => !p.includes(`${path.sep}_shared${path.sep}`) && !cLevelFiles.has(p)).length;
@@ -85,14 +110,15 @@ for (const file of scanFiles) {
   const rel = path.relative(root, file);
   if (
     rel === 'CHANGELOG.md' ||
-    rel === 'scripts/vais-validate-plugin.js'
+    rel === 'scripts/vais-validate-plugin.js' ||
+    rel.startsWith(`scripts${path.sep}skill_eval${path.sep}`)
   ) {
     continue;
   }
   const text = fs.readFileSync(file, 'utf8');
   for (const token of forbiddenRuntimeStrings) {
     if (text.includes(token)) {
-      errors.push(`Forbidden Claude runtime token "${token}" found in ${rel}`);
+      errors.push(`Forbidden non-Codex runtime token "${token}" found in ${rel}`);
     }
   }
 }

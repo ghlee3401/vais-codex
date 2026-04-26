@@ -95,4 +95,4 @@ npm run validate
 paths, and launch pipeline behavior.
 
 Historical migration notes from the pre-Codex implementation live under
-`legacy/claude-design/` and are excluded from runtime validation.
+`legacy/pre-codex-design/` and are excluded from runtime validation.

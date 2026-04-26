@@ -5,7 +5,7 @@ description: |
   그로스 전략 설계. GTM plan, growth loop, funnel optimization, email automation, North Star Metric 정의.
   marketing-analytics-analyst와의 경계: growth-analyst는 "전략 설계", marketing-analytics는 "성과 측정/어트리뷰션".
   Use when: CBO가 Design phase에서 GTM 전략 + growth loop 설계를 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

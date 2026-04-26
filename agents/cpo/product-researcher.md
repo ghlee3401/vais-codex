@@ -5,7 +5,7 @@ description: |
   Conducts product research including JTBD-based user personas, market sizing (TAM/SAM/SOM),
   competitor analysis (5 companies), and customer journey mapping.
   Use when: delegated by CPO for market research or user persona development.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Glob, Grep, TodoWrite]
 memory: none
 disallowedTools:

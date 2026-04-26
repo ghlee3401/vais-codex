@@ -3,7 +3,7 @@
 
 module.exports = [
   {
-    files: ['scripts/**/*.js', 'lib/**/*.js', 'hooks/**/*.js'],
+    files: ['scripts/**/*.js', 'lib/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'commonjs',

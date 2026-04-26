@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Writes Strategy Kernel using Rumelt 'Good Strategy / Bad Strategy' framework. Produces Diagnosis (현실 단순화) + Guiding Policy (trade-off 명시) + Coherent Actions (상호 강화) 3-단계 인과 사슬. Self-deception 위험으로 review_recommended=true.
   Use when: delegated by CEO after vision is defined, before What/roadmap phase. Policy: Always (A) — strategy without kernel is wish-list.
-model: sonnet
+model: gpt-5.4
 layer: strategy
 agent-type: subagent
 parent: ceo

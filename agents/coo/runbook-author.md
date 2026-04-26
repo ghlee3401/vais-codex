@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Writes operational Runbook (deployment procedures + incident playbook) following Google SRE book conventions. Produces deploy checklist (pre-deploy → deploy → smoke test → rollback) + incident severity tree (Sev 1~4 + SLA) + on-call handoff checklist. Scope-gated to prevent useless runbooks for local-only or pre-pilot projects.
   Use when: delegated by COO for operational documentation. Policy: Scope (B) — only when deployment.sla_required=true.
-model: sonnet
+model: gpt-5.4
 layer: operations
 agent-type: subagent
 parent: coo

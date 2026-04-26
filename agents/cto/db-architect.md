@@ -5,7 +5,7 @@ description: |
   Optimizes database schemas, creates migrations, tunes queries, and designs indexes.
   Handles deep DB specialization (distinct from infra-architect's broader infrastructure scope).
   Use when: delegated by CTO for database optimization or advanced schema work.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

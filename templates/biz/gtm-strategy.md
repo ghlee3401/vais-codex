@@ -100,7 +100,7 @@ Vision (BHAG) ─▶ Positioning Statement ─▶ Value Prop ─▶ Tagline ─�
 ### 1. North Star Metric
 
 **NSM**: **"Weekly Active Users completing 30-min PRD with canon_source"** (정전 명시 PRD 30분 완성 weekly user)
-**측정**: hook event tracking (PRD generation + canon_source 검증)
+**측정**: runtime event tracking (PRD generation + canon_source 검증)
 **Counter**: NPS (정성 만족도) — vanity metric 회피
 
 ### 2. Four Fits 평가 (현재 상태)

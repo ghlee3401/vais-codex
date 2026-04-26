@@ -5,7 +5,7 @@ description: |
   Validates plugin deployment readiness by checking package.json, SKILL.md, agent frontmatter,
   and code safety. Returns validation results to CSO.
   Use when: delegated by CSO Gate B for plugin structure and safety verification.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:
@@ -72,7 +72,7 @@ required.forEach(k => { if (!p[k]) console.log('MISSING:', k) })
 각 `agents/{c-level}/*.md` 파일 검사:
 - [ ] `name`: 에이전트 식별자 존재
 - [ ] `description`: Triggers 포함
-- [ ] `model`: opus 또는 sonnet
+- [ ] `model`: gpt-5.5 또는 gpt-5.4
 - [ ] `tools`: 허용 도구 목록 존재
 - [ ] `disallowedTools`: 위험 명령 제한 (최소 `Bash(rm -rf*)`)
 

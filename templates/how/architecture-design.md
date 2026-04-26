@@ -101,8 +101,8 @@ graph LR
   CLevel --> SubAgent[44 sub-agents]
   CLevel --> ProjectProfile[lib/project-profile.js]
   ProjectProfile --> Catalog[catalog.json]
-  CLevel --> Hooks[hooks/*.js]
-  Hooks --> Status[.vais/status.json]
+  CLevel --> RuntimeCLI[scripts/*.js]
+  RuntimeCLI --> Status[.vais/status.json]
   CLevel --> Docs[docs/{feature}/]
   SubAgent --> Model provider[Model provider Codex model runtime]
 ```

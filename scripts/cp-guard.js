@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS hook] cp-guard crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
-process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] cp-guard rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
+process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS CLI] cp-guard crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
+process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS CLI] cp-guard rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
 /**
  * VAIS Code - Checkpoint Guard
  * C-Level 에이전트 종료 시 필수 체크포인트(사용자 확인)가 호출되었는지 검증.

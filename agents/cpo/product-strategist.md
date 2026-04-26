@@ -5,7 +5,7 @@ description: |
   Develops product strategy using Product Strategy Canvas (9 sections), JTBD Value Proposition,
   Lean Canvas, Osterwalder Value Proposition Canvas (VPC), and frameworks like SWOT/PESTLE/Porter's Five Forces/Ansoff Matrix.
   Use when: delegated by CPO for product strategy formulation. (v0.59 Sprint 6 — VPC ownership 이관: copy-writer (CBO) → product-strategist (CPO).)
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Glob, Grep, TodoWrite]
 memory: none
 artifacts:

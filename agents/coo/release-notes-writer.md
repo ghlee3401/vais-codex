@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Writes structured Release Notes and maintains CHANGELOG.md following Keep a Changelog convention. Produces per-release notes with Added / Changed / Deprecated / Removed / Fixed / Security 6 sections. Determines Semantic Versioning (Major/Minor/Patch) from commit log.
   Use when: delegated by COO at every deployment. Policy: Always (A) — release documentation required for every release regardless of scale.
-model: sonnet
+model: gpt-5.4
 layer: operations
 agent-type: subagent
 parent: coo

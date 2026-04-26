@@ -4,7 +4,7 @@ version: 1.0.0
 description: |
   Implements backend APIs, server logic, and database integrations.
   Use when: delegated by CTO for API implementation or server-side development.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

@@ -5,7 +5,7 @@ description: |
   단위 경제성 전문. CAC/LTV/Payback/Cohort/마진 분석 + SaaS metrics (ARR/NRR/GRR).
   financial-modeler와의 경계: unit-economics는 "단위 경제성(per-user)", financial-modeler는 "전사 재무제표".
   Use when: CBO가 Do phase에서 단위 경제성 분석을 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: business
 agent-type: subagent
 parent: cbo

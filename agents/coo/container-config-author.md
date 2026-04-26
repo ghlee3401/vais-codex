@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Creates Dockerfile + docker-compose.yml for containerized deployments using multi-stage builds + security best practices (non-root user / minimal base image / .dockerignore). Scope-gated to prevent useless container config for local-only Node CLI tools.
   Use when: delegated by COO for container setup. Policy: Scope (B) — only when deployment.target IN [cloud, hybrid, on-prem].
-model: sonnet
+model: gpt-5.4
 layer: operations
 agent-type: subagent
 parent: coo

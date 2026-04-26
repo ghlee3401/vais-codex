@@ -4,7 +4,7 @@ version: 0.59.0
 description: |
   Defines OKRs (Objective + 3-5 Key Results) following Grove / Doerr methodology. Produces quarterly OKR set with leading/lagging KR distinction + 0.7 stretch scoring. Verifies "KR all met = O auto-met" logical contract.
   Use when: delegated by CEO/CPO after strategy kernel is defined. Policy: Always (A) — OKR is the execution contract between strategy and team.
-model: sonnet
+model: gpt-5.4
 layer: strategy
 agent-type: subagent
 parent: ceo

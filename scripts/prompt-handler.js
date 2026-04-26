@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS hook] prompt-handler crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
-process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS hook] prompt-handler rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
+process.on('uncaughtException', e => { try { process.stderr.write(`[VAIS CLI] prompt-handler crashed: ${e.message}\n`); } catch (_) {} process.exit(0); });
+process.on('unhandledRejection', e => { try { process.stderr.write(`[VAIS CLI] prompt-handler rejected: ${e && e.message || e}\n`); } catch (_) {} process.exit(0); });
 /**
- * VAIS Code - UserPromptSubmit Handler
+ * VAIS Code - cli:prompt-context Handler
  * 사용자 입력에서 의도를 감지하여 워크플로우 컨텍스트 주입
  */
 const { readStdin, outputAllow, outputEmpty } = require('../lib/io');
 const { debugLog } = require('../lib/debug');
-const { logHook } = require('../lib/hook-logger');
+const { logRuntimeEvent } = require('../lib/runtime-logger');
 const { getActiveFeature, getProgressSummary } = require('../lib/status');
 const { loadConfig } = require('../lib/paths');
 
@@ -168,11 +168,11 @@ if (detectedPhase && activeFeature) {
     `진행 중인 피처: "${activeFeature}"\n` +
     `해당 단계의 스킬을 사용하려면: \`/vais ${detectedPhase} ${activeFeature}\``;
 
-  logHook('UserPromptSubmit', 'ok', { detected: detectedPhase, feature: activeFeature });
+  logRuntimeEvent('cli:prompt-context', 'ok', { detected: detectedPhase, feature: activeFeature });
   debugLog('PromptHandler', 'Intent detected', { phase: detectedPhase, feature: activeFeature });
   outputAllow(msg);
 } else {
-  logHook('UserPromptSubmit', 'ok', { detected: null });
+  logRuntimeEvent('cli:prompt-context', 'ok', { detected: null });
   outputEmpty();
 }
 

@@ -82,8 +82,8 @@ project_context_reason: "Alignment 단계 — What (PRD/Roadmap) ↔ How (Archit
 
 | What | How | 정합 |
 |------|-----|:---:|
-| PRD §4 Solution (Profile + Catalog + clevel-coexistence) | architecture-design (Mermaid: Skill→CLevel→SubAgent→Profile→Catalog→Hooks) | ✅ |
-| PRD §5 Must F1 (Profile schema) | api-implementation (Hook PostToolUse — ideation-guard) + lib/project-profile.js | ✅ |
+| PRD §4 Solution (Profile + Catalog + clevel-coexistence) | architecture-design (Mermaid: Skill→CLevel→SubAgent→Profile→Catalog→RuntimeCLI) | ✅ |
+| PRD §5 Must F1 (Profile schema) | api-implementation (runtime CLI profile extraction) + lib/project-profile.js | ✅ |
 | PRD §5 Must F2 (Template metadata) | scripts/template-validator.js + scripts/build-catalog.js | ✅ |
 | PRD §5 Must F3 (50+ catalog) | templates/{core/why/what/how/biz/alignment}/*.md (34 templates by Sprint 13) | ✅ (catalog 34) |
 | PRD §5 Must F4 (44 sub-agent audit) | scripts/sub-agent-audit.js + 매트릭스 | ✅ |

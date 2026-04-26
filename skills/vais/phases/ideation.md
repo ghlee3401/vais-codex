@@ -1,6 +1,6 @@
 ---
 name: ideation
-version: 0.2.0
+version: 0.3.0
 description: Codex-native optional ideation workflow for shaping unclear product, business, technical, or operational ideas before Plan.
 ---
 

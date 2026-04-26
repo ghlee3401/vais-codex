@@ -1,6 +1,6 @@
 ---
 name: cpo
-version: 0.2.0
+version: 0.3.0
 description: Codex-native CPO workflow for discovery, PRD, roadmap, user stories, acceptance criteria, and product QA.
 ---
 

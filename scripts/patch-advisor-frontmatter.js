@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 모든 Sonnet sub-agent frontmatter에 advisor + includes 필드 일괄 추가.
+ * 모든 Codex specialist role frontmatter에 advisor + includes 필드 일괄 추가.
  * 멱등: 이미 존재하면 스킵.
  *
  * Usage: node scripts/patch-advisor-frontmatter.js [--dry-run]

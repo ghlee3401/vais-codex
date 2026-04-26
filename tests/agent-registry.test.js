@@ -12,7 +12,7 @@ const registry = require('../lib/registry/agent-registry');
 test('parseFrontmatter: YAML frontmatter 파싱', () => {
   const raw = `---
 name: test-agent
-model: sonnet
+model: gpt-5.4
 includes:
   - _shared/advisor-guard.md
 ---
@@ -20,7 +20,7 @@ includes:
 # Body here`;
   const { frontmatter, body } = registry.parseFrontmatter(raw);
   assert.strictEqual(frontmatter.name, 'test-agent');
-  assert.strictEqual(frontmatter.model, 'sonnet');
+  assert.strictEqual(frontmatter.model, 'gpt-5.4');
   assert.deepStrictEqual(frontmatter.includes, ['_shared/advisor-guard.md']);
   assert.ok(body.includes('# Body here'));
 });
@@ -41,7 +41,7 @@ test('loadAgent: advisor-guard.md 로드', () => {
 test('loadAgent: CBO cbo.md 로드 + frontmatter', () => {
   const agent = registry.loadAgent('agents/cbo/cbo.md');
   assert.strictEqual(agent.frontmatter.name, 'cbo');
-  assert.strictEqual(agent.frontmatter.model, 'opus');
+  assert.strictEqual(agent.frontmatter.model, 'gpt-5.5');
   assert.ok(agent.body.includes('# CBO Agent'));
 });
 
@@ -61,7 +61,7 @@ test('loadAgent: includes가 있으면 prepend 병합', () => {
   fs.writeFileSync(fixturePath, '## TEST GUARD\nThis is a test guard.');
   fs.writeFileSync(testAgentPath, `---
 name: sample
-model: sonnet
+model: gpt-5.4
 includes:
   - _shared/test-fixture-guard.md
 ---

@@ -5,7 +5,7 @@ description: |
   Designs user interview scripts, usability test plans, and deepens persona definitions.
   Handles specialized UX research separated from product-researcher's broader market analysis.
   Use when: delegated by CPO for UX research, interview script design, or usability testing.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, TodoWrite]
 memory: none
 disallowedTools:

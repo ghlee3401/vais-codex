@@ -5,7 +5,7 @@ description: |
   Monitors service health immediately after deployment using curl/API/log-based lightweight checks.
   Detects errors and performance regressions in the canary window.
   Use when: delegated by COO for short-term post-deployment health verification (distinct from sre-engineer which handles ongoing/long-term monitoring infrastructure).
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

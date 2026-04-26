@@ -5,7 +5,7 @@ description: |
   Synthesizes product-discoverer, product-strategist, and product-researcher outputs into a complete PRD with 8 sections.
   Includes OKR, sprint plan, pre-mortem, stakeholder map, and user/job stories.
   Use when: delegated by CPO for PRD document generation.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, TodoWrite]
 memory: none
 disallowedTools:

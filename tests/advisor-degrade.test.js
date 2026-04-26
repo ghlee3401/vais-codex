@@ -1,6 +1,6 @@
 /**
  * Advisor Degrade Gracefully tests (sub-plan 04)
- * SC-20: 비용 캡 초과 → 자동 비활성화 + Sonnet 단독
+ * SC-20: 비용 캡 초과 → 자동 비활성화 + current Codex role continues
  */
 
 const { test } = require('node:test');

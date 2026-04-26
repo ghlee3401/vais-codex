@@ -5,7 +5,7 @@ description: |
   Performs security audits covering OWASP Top 10, authentication/authorization,
   and sensitive data handling. Returns findings to CSO for final judgment.
   Use when: delegated by CSO Gate A for security vulnerability assessment.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

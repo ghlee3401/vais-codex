@@ -5,7 +5,7 @@ description: |
   의존성 취약점 + 라이선스 + 공급망 리스크 분석. CVE lookup + SPDX license + typosquatting 탐지.
   secret-scanner와 병렬 실행. npm audit 폴백 지원.
   Use when: CSO가 Do/QA phase에서 의존성 보안 분석을 위임할 때.
-model: sonnet
+model: gpt-5.4
 layer: security
 agent-type: subagent
 parent: cso

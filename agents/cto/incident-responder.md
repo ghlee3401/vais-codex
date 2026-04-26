@@ -5,7 +5,7 @@ description: |
   Performs systematic debugging through a 4-phase process: investigate → analyze → hypothesize → implement.
   Follows the Iron Law: no fix without root cause identification.
   Use when: delegated by CTO for root cause analysis of complex or recurring bugs.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Write, Edit, Glob, Grep, Bash, TodoWrite]
 memory: none
 disallowedTools:

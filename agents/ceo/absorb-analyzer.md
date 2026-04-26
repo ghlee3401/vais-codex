@@ -5,7 +5,7 @@ description: |
   Analyzes external references for absorption feasibility. Evaluates target files for duplication,
   quality/fitness scoring, and C-Level domain classification, then returns results to CEO.
   Use when: delegated by CEO during absorb mode to assess external skill/agent references.
-model: sonnet
+model: gpt-5.4
 tools: [Read, Glob, Grep, Bash, TodoWrite]
 disallowedTools:
   - "Bash(rm -rf*)"

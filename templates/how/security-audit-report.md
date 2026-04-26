@@ -101,7 +101,7 @@ project_context_reason: "How 단계 — 모든 프로젝트 보안 감사. OWASP
 | Version | 0.59.0 |
 | Audit Date | 2026-04-25 (Sprint 1~3 종결 시점) |
 | Auditor | (자가 감사 — security-auditor 위임 가능) |
-| Scope | hooks/ + lib/project-profile.js + scripts/ |
+| Scope | Codex skill surface + lib/project-profile.js + scripts/ |
 | OOS | Model provider Codex model runtime (vendor) / 사용자 로컬 file system |
 
 ### OWASP Top 10 (Sprint 1~3 적용 영역)
@@ -116,7 +116,7 @@ project_context_reason: "How 단계 — 모든 프로젝트 보안 감사. OWASP
 | A06 Vulnerable Components | ⏳ | dependency-analyzer 정기 실행 권장 |
 | A07 Identification Failures | N/A | 로컬 plugin (인증 X) |
 | A08 Data Integrity Failures | ✅ | atomicWriteSync (lib/fs-utils) |
-| A09 Logging Failures | ✅ | hook 모든 동작 stderr 기록 |
+| A09 Logging Failures | ✅ | runtime CLI 동작 stderr/runtime-log 기록 |
 | A10 SSRF | N/A | 외부 HTTP 호출 없음 (Codex model runtime 만 — sandbox) |
 
 ### STRIDE (Sprint 1~3)
