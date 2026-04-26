@@ -36,7 +36,7 @@ function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (!['node_modules', '.git'].includes(entry.name)) walk(p, out);
+      if (!['node_modules', '.git', 'legacy'].includes(entry.name)) walk(p, out);
     } else {
       out.push(p);
     }
@@ -85,8 +85,7 @@ for (const file of scanFiles) {
   const rel = path.relative(root, file);
   if (
     rel === 'CHANGELOG.md' ||
-    rel === 'scripts/vais-validate-plugin.js' ||
-    rel.startsWith(`guide${path.sep}`)
+    rel === 'scripts/vais-validate-plugin.js'
   ) {
     continue;
   }

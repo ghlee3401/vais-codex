@@ -2,9 +2,8 @@
 
 Virtual AI C-Suite for product and software delivery in Codex.
 
-VAIS Code ports the `original VAIS` operating model to Codex: CEO/CPO/CTO/CSO/CBO/COO
-roles, 38 specialist role documents, phase gates, document contracts, and global plugin
-installation.
+VAIS Code is a Codex-native product workflow plugin: CEO/CPO/CTO/CSO/CBO/COO roles,
+specialist role guides, phase gates, document contracts, and global plugin installation.
 
 ## Install Globally
 
@@ -51,6 +50,10 @@ vais status
 vais next
 ```
 
+The primary skill is `skills/vais/SKILL.md`. Phase routers under `skills/vais/phases/`
+define the productized Codex execution surface. Specialist files under `agents/` are role
+guides, not a separate runtime.
+
 ## Workflow
 
 ```text
@@ -90,3 +93,6 @@ npm run validate
 
 `vais.config.json` is the single source of truth for roles, phases, dependencies, document
 paths, and launch pipeline behavior.
+
+Historical migration notes from the pre-Codex implementation live under
+`legacy/claude-design/` and are excluded from runtime validation.

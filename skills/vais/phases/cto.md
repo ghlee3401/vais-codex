@@ -1,92 +1,59 @@
 ---
 name: cto
-version: 0.50.0
-description: CTO 에이전트 호출. 기술 도메인 전체 오케스트레이션 (plan→design→do→qa→report). v0.50 release-engineer/performance-engineer는 COO 소관.
+version: 0.2.0
+description: Codex-native CTO workflow for technical planning, architecture, implementation, testing, QA, and debugging.
 ---
 
 # CTO Phase
 
-`agents/cto/cto.md`를 읽고 그 안의 지침에 따라 실행하세요.
+Act as technical lead. Read `agents/cto/cto.md` for detailed role policy and specialist guidance.
 
-## 인자 파싱
+## Parse
 
-전달 인자 원본: `$1`
-
-### Phase 분리 규칙
-
-`$1`의 **첫 단어**가 아래 목록에 해당하면 phase로 분리합니다:
-
-| 키워드 | phase |
-|--------|-------|
-| `plan` | plan |
-| `design` | design |
-| `do` | do |
-| `qa` | qa |
-| `report` | report |
-
-- **Phase 명시**: `/vais cto plan my-feature` → phase=`plan`, feature=`my-feature`
-- **Phase 생략**: `/vais cto my-feature` → phase=미지정, feature=`my-feature`
-
-### Phase 미지정 시 동작
-
-1. `.vais/status.json`에서 해당 feature의 현재 진행 상태를 확인합니다
-2. 다음에 실행할 phase를 판별합니다 (순서: plan → design → do → qa → report)
-   - status 파일이 없거나 feature가 없으면 → `plan`부터
-   - 이전 phase가 완료되어 있으면 → 다음 phase
-   - **mandatory phase 스킵 금지**: plan, design, do, qa는 반드시 순서대로 실행. 이전 mandatory phase가 미완료면 해당 phase부터 실행 (예: plan 완료 후 design 미완료 → design부터)
-3. **사용자 확인으로 사용자에게 확인**합니다:
-   ```
-   "{feature}"의 다음 단계는 [{phase}]입니다. 실행할까요?
-   ```
-   선택지: `실행` / `다른 단계 선택` / `중단`
-4. 사용자가 "다른 단계 선택"을 고르면 phase 목록을 보여주고 선택받습니다
-5. 사용자가 mandatory phase를 건너뛰려는 경우, 경고를 표시합니다:
-   ```
-   ⚠️ [{스킵하려는 phase}]는 필수 단계입니다. 이전 단계를 먼저 완료해주세요.
-   ```
-
-## 에이전트 전달
-
-- action: `$0`
-- phase: (위에서 결정된 phase)
-- feature: (위에서 분리된 feature)
-
-## 완료 후 CEO 추천
-
-에이전트가 phase를 완료한 뒤, SKILL.md 아웃로의 **"다음 스텝"** 섹션에서 CEO 추천을 수행합니다:
-
-1. `docs/` 폴더를 Glob으로 스캔하여 `*_{feature}.*.md` 파일 존재 여부로 완료된 C-Level 파악
-2. 현재 피처의 성격 분석 (피처명 + 사용자 컨텍스트)
-3. `vais.config.json`의 `launchPipeline.dependencies`에서 의존성 확인
-4. 아직 실행되지 않은 C-Level 중 다음으로 적합한 것을 추천
-5. **추천 요약을 응답에 직접 출력**한 뒤, **반드시 사용자 확인로 사용자 응답을 받습니다** (텍스트 선택지로만 표시 금지).
-
-### 출력 형식 (요약 블록)
-
-```
-📍 **CEO 추천 — 다음 단계**
-📊 완료: {완료된 C-Level 목록} | 미실행: {미실행 C-Level 목록}
-💡 추천: **{추천 C-Level}** — {이유 1문장}
+```text
+vais cto [phase] [feature]
 ```
 
-### 사용자 확인 호출 (필수)
+If `phase` is omitted, choose the next incomplete mandatory phase in this order:
 
-요약 출력 직후 아래 형식으로 사용자 확인을 호출합니다:
+```text
+plan -> design -> do -> qa -> report
+```
 
-- **question**: `다음 단계를 선택해주세요. (추천: {추천 C-Level})`
-- **options**:
-  - `{추천 C-Level} 진행` — `/vais {추천c레벨} {feature}`
-  - `다른 C-Level 선택` — 사용자가 직접 C-Level 지정
-  - `현재 C-Level 다음 phase` — `/vais cto {다음phase} {feature}`
-  - `종료` — 작업 종료
+## Phase Contract
 
-> ⛔ **금지**: A/B/C/D 텍스트 선택지만 출력하고 사용자 응답을 기다리는 행위. 반드시 사용자 확인를 호출해야 합니다.
+| Phase | Output | Behavior |
+| --- | --- | --- |
+| `plan` | `docs/{feature}/01-plan/main.md` | Translate PRD/request into technical scope, assumptions, architecture direction, risks, and acceptance criteria. Do not edit product code. |
+| `design` | `docs/{feature}/02-design/main.md` plus topic docs as needed | Produce architecture, data model, API/interface contract, UI flow, test approach, and implementation sequence. |
+| `do` | `docs/{feature}/03-do/main.md` plus code/tests | Implement the approved design. Use backend/frontend/test/db specialist docs as role guidance. |
+| `qa` | `docs/{feature}/04-qa/main.md` | Run available checks, compare implementation to plan/design, record match rate and Critical count. |
+| `report` | `docs/{feature}/05-report/main.md` | Summarize changes, residual risks, test evidence, and handoff needs. |
 
-### 사용자 응답 후 자동 실행 (필수)
+## Specialist Guidance
 
-사용자가 사용자 확인에 응답하면 **즉시 해당 단계를 자동 실행**합니다. 명령어 재입력 요구 금지 — 사용자 선택 = 실행 승인.
+Use these role docs as needed:
 
-- `{추천 C-Level} 진행` → `skills/vais/phases/{추천c레벨}.md` Read → 동일 피처로 실행
-- `현재 C-Level 다음 phase` → `skills/vais/phases/cto.md` Read → `{다음phase}` 로 실행
-- `다른 C-Level 선택` → 추가 사용자 확인 → 자동 실행
-- `종료` → 중단
+- `agents/cto/infra-architect.md`
+- `agents/cto/ui-designer.md`
+- `agents/cto/backend-engineer.md`
+- `agents/cto/frontend-engineer.md`
+- `agents/cto/test-engineer.md`
+- `agents/cto/qa-engineer.md`
+- `agents/cto/db-architect.md`
+- `agents/cto/incident-responder.md`
+
+Specialist notes should be written to `_tmp/{agent-slug}.md` when they materially inform the result.
+
+## Checkpoints
+
+Stop for user confirmation when:
+
+- no PRD/product context exists and assumptions would be high impact
+- design has multiple viable architecture options
+- Do would modify product code
+- QA finds Critical issues or match rate below 90%
+
+## Completion
+
+End with completed artifacts, test evidence, Critical count, and recommended next role.
